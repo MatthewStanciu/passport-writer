@@ -40,6 +40,41 @@ struct PassportRowView: View {
     }
 }
 
+struct FilterButtonView: View {
+    let icon: String
+    let label: String
+    
+    @State private var selected = false
+    
+    @State private var statusOptions = ["None", "Activated", "Not Activated"]
+    @State private var statusFilter = "None"
+    
+    var body: some View {
+//        Button(action: {
+//            selected = !selected
+//        }) {
+//            HStack {
+//                Image(systemName: icon)
+//                Text(label)
+//            }
+//            .padding([.horizontal], 8)
+//            .padding([.vertical], 6)
+//        }
+//        .background(Color.secondary)
+//        .foregroundColor(.black)
+//        .cornerRadius(8)
+        Picker("Select a paint color", selection: $statusFilter) {
+            ForEach(statusOptions, id: \.self) {
+                Text($0)
+            }
+        }
+        .pickerStyle(.menu)
+                .background(Color.secondary)
+                .foregroundColor(.black)
+                .cornerRadius(8)
+    }
+}
+
 struct SkeletonView: View {
     var body: some View {
         List {
@@ -76,6 +111,11 @@ struct PassportListView: View {
             if viewModel.passports == [] {
                 SkeletonView()
             } else {
+                HStack {
+                    FilterButtonView(icon: "bolt.fill", label: "Status")
+                    FilterButtonView(icon: "calendar", label: "Before")
+                    FilterButtonView(icon: "calendar", label: "After")
+                }
                 List {
                     ForEach(filteredPassports) { passport in
                         NavigationLink {
