@@ -91,7 +91,7 @@ struct PassportListView: View {
     @State private var showAuthSheet = false
     
     @State private var searchText: String = ""
-    @State private var sortOption: SortOption = .idAscending
+    @State private var sortOption: SortOption = .idDescending
     @State private var statusOption: StatusOption = .all
     @State private var showSignOutAlert = false
     
