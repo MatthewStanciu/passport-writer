@@ -223,6 +223,10 @@ struct PassportListView: View {
             }
         } catch {
             print("Network error: \(error)")
+            // TODO: add retry + failure logic
+            // right now if we don't revoke this token,
+            // the app will just become stuck with no feedback
+            oauth = nil
         }
     }
     
